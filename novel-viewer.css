@@ -1,0 +1,561 @@
+@charset "UTF-8";
+/* --------------------------------------------------
+  Template by espace（https://espace.i-ra.site/）
+  Copyright: 2020 espace.
+
+  利用規約を遵守の上、ご利用ください。
+  二次配布、販売は禁止しています。
+  --------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=BIZ+UDPMincho&family=Sawarabi+Mincho&display=swap");
+:root {
+    /** 開閉ボタン **/
+    /* テキスト */
+    --env-button-open-text: "設定";
+    --env-button-close-text: "關閉";
+    /* テキスト色 */
+    --env-button-text-color: #ffffff;
+    /* 背景色 */
+    --env-button-bg-color: #333333;
+    /* 線色 */
+    --env-button-border-color: #333333;
+    /* 幅 */
+    --env-button-width: 40px;
+    /* 高さ */
+    --env-button-height: 40px;
+    /* 角丸サイズ */
+    --env-button-rounded: 5px 0 0 5px;
+    /* 上からの位置 */
+    --env-button-position-top: 100px;
+    /* 下からの位置 */
+    --env-button-position-bottom: auto;
+    /* 左からの位置 */
+    --env-button-position-left: auto;
+    /* 右からの位置 */
+    --env-button-position-right: 0;
+    /** 設定画面 **/
+    /* タイトルテキスト */
+    --env-menu-title-text: "閱讀設定";
+    /* リセットボタンテキスト */
+    --env-menu-reset-text: "Reset";
+    /* タイトル下線色 */
+    --env-menu-title-border-color: #bcb9b9;
+    /* 文字色 */
+    --env-menu-color: #333333;
+    /* 背景色 */
+    --env-menu-bg-color: #efefef;
+    /* 角丸サイズ */
+    --env-menu-rounded: 5px;
+    /* 外側の背景色 */
+    --env-menu-overlay-color: rgba(0, 0, 0, 0.3);
+    /* input関係要素の角丸サイズ */
+    --env-menu-input-rounded: 0;
+    /* inputの色（メイン） */
+    --env-menu-input-main-color: #333333;
+    /* inputの色（サブ） */
+    --env-menu-input-sub-color: #ffffff;
+    /* input[type="range"]のバー色 */
+    --env-menu-input-bar-color: #eeeeee;
+    /** ベーシックモードのビジュアル設定 **/
+    /* デフォルトカラータイプ設定 */
+    --env-color-type-default-bg-color: #f1f6fa;
+    --env-color-type-default-color: #333333;
+    /* 縦書き時の高さ */
+    --env-vertical-height-pc: 80vh;
+    --env-vertical-height-sp: 80vh;
+    /* フォントサイズ設定 */
+    --env-font-size-sm: 14px;
+    --env-font-size-md: 16px;
+    --env-font-size-lg: 20px;
+    --env-font-size-xl: 24px;
+    /* 行間設定 */
+    --env-line-height-sm: 120%;
+    --env-line-height-md: 160%;
+    --env-line-height-lg: 200%;
+    --env-line-height-xl: 240%;
+    /* 文字間隔設定 */
+    --env-letter-spacing-sm: 0;
+    --env-letter-spacing-md: 5px;
+    --env-letter-spacing-lg: 10px;
+    --env-letter-spacing-xl: 15px;
+    /** 各種アニメーションの時間 **/
+    --env-animation: 0.5s;
+}
+
+.env-button {
+    position: fixed;
+    top: var(--env-button-position-top);
+    bottom: var(--env-button-position-bottom);
+    left: var(--env-button-position-left);
+    right: var(--env-button-position-right);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: var(--env-button-width);
+    height: var(--env-button-height);
+    padding: var(--env-button-padding);
+    background: var(--env-button-bg-color);
+    color: var(--env-button-text-color);
+    border: 1px solid var(--env-button-border-color);
+    border-radius: var(--env-button-rounded);
+    line-height: 1;
+    z-index: 99;
+    cursor: pointer;
+}
+.env-button::before,
+.env-button::after {
+    width: 100%;
+    transition: none !important;
+}
+.env-button::before {
+    content: "";
+    height: calc(100% - 22px);
+    background: url("env-icon-open.svg") no-repeat center/contain;
+}
+.env-button::after {
+    content: var(--env-button-open-text);
+    font-size: 10px;
+    width: 100%;
+    height: 10px;
+    font-weight: bold;
+    transform: scale(0.8);
+}
+.env-button.open::before {
+    background: url("env-icon-close.svg") no-repeat center/contain;
+}
+.env-button.open::after {
+    content: var(--env-button-close-text);
+}
+
+.env-no-scroll {
+    overflow: hidden;
+}
+
+.env-menu {
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--env-menu-overlay-color);
+    transition: visible var(--env-animation), opacity var(--env-animation),
+        opacity var(--env-animation);
+}
+.env-menu.open {
+    visibility: visible;
+    opacity: 1;
+    z-index: 98;
+}
+.env-menu.env-menu {
+    font-size: 10px;
+}
+.env-menu.env-menu-basic .env-menu-inner,
+.env-menu.env-menu-top .env-menu-inner,
+.env-menu.env-menu-bottom .env-menu-inner {
+    max-height: calc(100vh - 50px);
+    max-height: calc(100svh - 50px);
+}
+.env-menu.env-menu-basic .env-menu-inner dl dt,
+.env-menu.env-menu-top .env-menu-inner dl dt,
+.env-menu.env-menu-bottom .env-menu-inner dl dt {
+    text-align: center;
+    justify-content: flex-end;
+}
+.env-menu.env-menu-top .env-menu-inner,
+.env-menu.env-menu-bottom .env-menu-inner,
+.env-menu.env-menu-left .env-menu-inner,
+.env-menu.env-menu-right .env-menu-inner {
+    position: absolute;
+    transition: all var(--env-animation) ease;
+}
+.env-menu.env-menu-basic .env-menu-inner dl,
+.env-menu.env-menu-left .env-menu-inner dl,
+.env-menu.env-menu-right .env-menu-inner dl {
+    gap: 10px;
+}
+.env-menu.env-menu-basic .env-menu-inner dl dd:not(:last-of-type),
+.env-menu.env-menu-left .env-menu-inner dl dd:not(:last-of-type),
+.env-menu.env-menu-right .env-menu-inner dl dd:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+.env-menu.env-menu-basic .env-menu-inner dl dd.env-menu-color,
+.env-menu.env-menu-left .env-menu-inner dl dd.env-menu-color,
+.env-menu.env-menu-right .env-menu-inner dl dd.env-menu-color {
+    grid-template-columns: repeat(3, 1fr);
+}
+.env-menu.env-menu-basic .env-menu-inner dl dd.env-menu-font,
+.env-menu.env-menu-left .env-menu-inner dl dd.env-menu-font,
+.env-menu.env-menu-right .env-menu-inner dl dd.env-menu-font {
+    grid-template-columns: repeat(2, 1fr);
+}
+.env-menu.env-menu-basic .env-menu-inner dl dd.env-menu-writing-mode,
+.env-menu.env-menu-left .env-menu-inner dl dd.env-menu-writing-mode,
+.env-menu.env-menu-right .env-menu-inner dl dd.env-menu-writing-mode {
+    grid-template-columns: repeat(2, 1fr);
+}
+.env-menu.env-menu-basic .env-menu-inner dl dd.env-menu-size,
+.env-menu.env-menu-left .env-menu-inner dl dd.env-menu-size,
+.env-menu.env-menu-right .env-menu-inner dl dd.env-menu-size {
+    grid-template-columns: repeat(4, 1fr);
+}
+.env-menu.env-menu-top .env-menu-inner,
+.env-menu.env-menu-bottom .env-menu-inner {
+    left: 0;
+    max-width: 100%;
+    height: 180px;
+}
+.env-menu.env-menu-top .env-menu-inner dl,
+.env-menu.env-menu-bottom .env-menu-inner dl {
+    grid-template-columns: repeat(4, 70px 1fr);
+    gap: 10px 20px;
+}
+.env-menu.env-menu-top .env-menu-inner dl dd.env-menu-color,
+.env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-color {
+    grid-column: 2/5;
+    grid-template-columns: repeat(6, 1fr);
+}
+.env-menu.env-menu-top .env-menu-inner dl dd.env-menu-font,
+.env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-font {
+    grid-column: 6/9;
+    grid-template-columns: repeat(6, 1fr);
+}
+.env-menu.env-menu-top .env-menu-inner dl dd.env-menu-writing-mode,
+.env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-writing-mode {
+    grid-template-columns: repeat(2, 1fr);
+}
+.env-menu.env-menu-top .env-menu-inner dl dd.env-menu-size,
+.env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-size {
+    grid-template-columns: repeat(4, 1fr);
+}
+.env-menu.env-menu-top .env-menu-inner {
+    top: -100%;
+}
+.env-menu.env-menu-top.open .env-menu-inner {
+    top: 0;
+}
+.env-menu.env-menu-bottom .env-menu-inner {
+    bottom: -100%;
+}
+.env-menu.env-menu-bottom.open .env-menu-inner {
+    bottom: 0;
+}
+.env-menu.env-menu-left .env-menu-inner,
+.env-menu.env-menu-right .env-menu-inner {
+    top: 0;
+    max-width: 370px;
+    max-height: 100vh;
+    height: 100%;
+}
+.env-menu.env-menu-left .env-menu-inner dl dt,
+.env-menu.env-menu-right .env-menu-inner dl dt {
+    justify-content: flex-start;
+}
+.env-menu.env-menu-left .env-menu-inner {
+    left: -100%;
+}
+.env-menu.env-menu-left.open .env-menu-inner {
+    left: 0;
+}
+.env-menu.env-menu-right .env-menu-inner {
+    right: -100%;
+}
+.env-menu.env-menu-right.open .env-menu-inner {
+    right: 0;
+}
+.env-menu.env-menu-basic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.env-menu.env-menu-basic .env-menu-inner {
+    position: relative;
+    max-width: 500px;
+    margin: 20px;
+}
+.env-menu.env-menu-basic .env-menu-inner dl {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+}
+.env-menu.env-menu-basic .env-menu-inner dl dt:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+.env-menu.env-menu .env-menu-inner {
+    width: 100%;
+    padding: 25px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: var(--env-menu-bg-color);
+    border-radius: var(--env-menu-rounded);
+    color: var(--env-menu-color);
+}
+.env-menu.env-menu .env-menu-inner dl {
+    display: grid;
+    max-height: calc(100svh - 148px);
+    margin: 20px 0 0;
+    overflow-y: auto;
+}
+.env-menu.env-menu .env-menu-inner dl dt {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+.env-menu.env-menu .env-menu-inner dl dd {
+    display: grid;
+    gap: 4px;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-inline-start: 0 !important;
+}
+.env-menu.env-menu .env-menu-inner dl dd.env-menu-color input[type="radio"]:checked + label {
+    border-width: 3px;
+    border-style: double;
+}
+.env-menu.env-menu .env-menu-inner input[type="radio"] {
+    display: none;
+}
+.env-menu.env-menu .env-menu-inner input[type="radio"] + label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid var(--env-menu-input-main-color);
+    border-radius: var(--env-menu-input-rounded);
+    background: var(--env-menu-input-sub-color);
+    color: var(--env-menu-input-main-color);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all var(--env-animation);
+    cursor: pointer;
+}
+.env-menu.env-menu .env-menu-inner input[type="radio"]:checked + label {
+    background: var(--env-menu-input-main-color);
+    color: var(--env-menu-input-sub-color);
+}
+.env-menu.env-menu .env-menu-inner input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    height: 3px;
+    width: 100%;
+    margin: 42px 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--env-menu-input-bar-color);
+    cursor: pointer;
+}
+.env-menu.env-menu .env-menu-inner input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--env-menu-input-main-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+}
+.env-menu.env-menu .env-menu-inner input[type="range"]::-moz-range-thumb {
+    background: var(--env-menu-input-main-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+}
+.env-menu.env-menu .env-menu-inner input[type="range"]::-moz-focus-outer {
+    border: 0;
+}
+.env-menu.env-menu .env-menu-inner input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+}
+.env-menu.env-menu .env-menu-inner input[type="range"] + label {
+    display: block;
+    width: 50px;
+    margin: auto;
+    padding: 0 5px;
+    border: 1px solid var(--env-menu-input-bar-color);
+    border-radius: var(--env-menu-input-rounded);
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+}
+.env-menu.env-menu .env-menu-title {
+    margin: 0;
+    border-bottom: 1px solid var(--env-menu-title-border-color);
+}
+.env-menu.env-menu .env-menu-title::before {
+    content: var(--env-menu-title-text);
+}
+.env-menu.env-menu .env-menu-button-area {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+.env-menu.env-menu .env-menu-button-area button {
+    padding: 2px 10px;
+    border: 1px solid var(--env-menu-input-main-color);
+    border-radius: var(--env-menu-input-rounded);
+    background: var(--env-menu-input-main-color);
+    font-size: 14px;
+    line-height: 1;
+    color: var(--env-menu-input-sub-color);
+    cursor: pointer;
+    transition: all var(--env-animation);
+}
+.env-menu.env-menu .env-menu-button-area button#envReset::before {
+    content: var(--env-menu-reset-text);
+}
+
+.env-base * {
+    font-family: inherit;
+}
+.env-base *:not(rt) {
+    font-size: inherit;
+}
+
+.env-color-type-default {
+    background-color: var(--env-color-type-default-bg-color) !important;
+    color: var(--env-color-type-default-color) !important;
+}
+.env-color-type-light {
+    background-color: #fff !important;
+    color: #333 !important;
+}
+.env-color-type-dark {
+    background-color: #555 !important;
+    color: #efefef !important;
+}
+.env-color-type-gray {
+    background-color: #eee !important;
+    color: #333 !important;
+}
+.env-color-type-cream {
+    background-color: #f5f3e6 !important;
+    color: #333 !important;
+}
+.env-color-type-sky {
+    background-color: #e6eff5 !important;
+    color: #333 !important;
+}
+
+.env-font-family-gothic {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+        "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
+}
+.env-font-family-mincho {
+    font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho",
+        serif, "Sawarabi Mincho" !important;
+}
+.env-font-family-udGothic {
+    font-family: "BIZ UDPGothic", sans-serif !important;
+}
+.env-font-family-udMincho {
+    font-family: "BIZ UDPMincho", serif !important;
+}
+.env-font-family-udKyokasho {
+    font-family: "UD デジタル 教科書体 NP-R" !important;
+}
+
+.env-writing-mode-vertical {
+    width: 100%;
+    height: var(--env-vertical-height-pc);
+    writing-mode: vertical-rl;
+    overflow-x: auto;
+}
+
+.env-font-size-sm {
+    font-size: var(--env-font-size-sm) !important;
+}
+.env-font-size-md {
+    font-size: var(--env-font-size-md) !important;
+}
+.env-font-size-lg {
+    font-size: var(--env-font-size-lg) !important;
+}
+.env-font-size-xl {
+    font-size: var(--env-font-size-xl) !important;
+}
+
+.env-line-height-sm {
+    line-height: var(--env-line-height-sm) !important;
+}
+.env-line-height-md {
+    line-height: var(--env-line-height-md) !important;
+}
+.env-line-height-lg {
+    line-height: var(--env-line-height-lg) !important;
+}
+.env-line-height-xl {
+    line-height: var(--env-line-height-xl) !important;
+}
+
+.env-letter-spacing-sm {
+    letter-spacing: var(--env-letter-spacing-sm) !important;
+}
+.env-letter-spacing-md {
+    letter-spacing: var(--env-letter-spacing-md) !important;
+}
+.env-letter-spacing-lg {
+    letter-spacing: var(--env-letter-spacing-lg) !important;
+}
+.env-letter-spacing-xl {
+    letter-spacing: var(--env-letter-spacing-xl) !important;
+}
+
+@media only screen and (max-width: 550px) {
+    .env-menu.env-menu-basic .env-menu-inner dl dt,
+    .env-menu.env-menu-top .env-menu-inner dl dt,
+    .env-menu.env-menu-bottom .env-menu-inner dl dt {
+        justify-content: flex-start;
+    }
+    .env-menu.env-menu-top .env-menu-inner,
+    .env-menu.env-menu-bottom .env-menu-inner {
+        max-height: 50vh;
+        height: 650px;
+    }
+    .env-menu.env-menu-top .env-menu-inner dl dd.env-menu-font,
+    .env-menu.env-menu-top .env-menu-inner dl dd.env-menu-size,
+    .env-menu.env-menu-top .env-menu-inner dl dd.env-menu-color,
+    .env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-font,
+    .env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-size,
+    .env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-color {
+        grid-column: 1;
+    }
+    .env-menu.env-menu-top .env-menu-inner dl dd.env-menu-color,
+    .env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-color {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .env-menu.env-menu-top .env-menu-inner dl dd.env-menu-font,
+    .env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-font {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .env-menu.env-menu-top .env-menu-inner dl dd.env-menu-size,
+    .env-menu.env-menu-bottom .env-menu-inner dl dd.env-menu-size {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .env-menu.env-menu-basic .env-menu-inner dl dt:not(:last-of-type),
+    .env-menu.env-menu-basic .env-menu-inner dl dd:not(:last-of-type),
+    .env-menu.env-menu-left .env-menu-inner dl dt:not(:last-of-type),
+    .env-menu.env-menu-left .env-menu-inner dl dd:not(:last-of-type),
+    .env-menu.env-menu-right .env-menu-inner dl dt:not(:last-of-type),
+    .env-menu.env-menu-right .env-menu-inner dl dd:not(:last-of-type) {
+        margin-bottom: 0;
+    }
+    .env-menu.env-menu-left .env-menu-inner,
+    .env-menu.env-menu-right .env-menu-inner {
+        max-width: calc(100% - 50px);
+        width: 300px;
+    }
+    .env-menu.env-menu .env-menu-inner dl {
+        grid-template-columns: 1fr;
+    }
+    .env-menu.env-menu .env-menu-inner input[type="range"] {
+        margin: 12px 0 10px;
+    }
+    .env-writing-mode-vertical {
+        height: var(--env-vertical-height-sp);
+    }
+}

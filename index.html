@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="googlebot" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#f1f6f9">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Noto+Serif+JP&family=Playfair+Display+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="unrelated.css">
+  <title>夕日とネモフィラ</title>
+</head>
+<body>
+  <header>
+    <div class="flame-01"></div>
+    <div class="flame-02"></div>
+    <div class="header-card">
+      <div class="header-card-decoration-01">
+        <div class="header-card-decoration-02">
+          <div class="header-card-decoration-03">
+            <h1>
+              夕日とネモフィラ
+              <span class="h1-sub">Akutagawa & Katou</span>
+            </h1>
+            2022.04.13- on going
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside>
+      <span class="aside-border">注意事項</span><br>
+      本網站內容皆相關文豪とアルケミスト（文豪與鍊金術師）的夢向創作：夢主對象為芥川龍之介。<br />
+      儘管多數創作將參考他的史實進行寫作或繪製，仍建議將各提及情節視為個人創作而非實際史實。
+      <br>
+      無論圖文，一切內容（包含網址）皆請勿外流。<br />
+      <br>
+      <mark>建議閱覽對象</mark>：能接受或喜歡夢向創作，不排斥針對史實人物戀愛幻想的人。
+    </aside>
+    <a href="#scroll" class="scroll">scroll</a>
+  </header>
+  <main id="scroll" class="main-flex-wrapper float-right">
+    <section class="main-flex-item">
+      <h2>主線</h2>
+      兩人交往以前的事。<br />
+      <ol class="ol-row">
+      <li><a href="article.html">1</a></li>
+      <li>2</li>
+      <li>3</li>
+      </ol>
+      <a href="article.html">1</a><br>
+    </section>
+    <section class="main-flex-item">
+      <h2>番外</h2>
+      交往前交往後的日常。
+    </section>
+    <section class="main-flex-item">
+      <h2>生日</h2>
+      發生在兩人生日期間的故事。
+    </section>
+    <section class="main-flex-item">
+      <h2>紀念日</h2>
+      相關紀念日；多以交往後的兩人互動為主軸的文章。
+    </section>
+    <section class="main-flex-item">
+      <h2>節日限定</h2>
+      相關常見節慶，包含交往前後不同時間點的故事。
+    </section>
+    <section class="main-flex-item">
+      <h2>Paro</h2>
+      與正常世界線不同的創作。部份參考相關他的史實，部分參考個人喜歡的作品。各篇開頭將補述該篇為哪一Paro的創作。
+    </section>
+    <section class="main-flex-item">
+      <h2>夏日憶想</h2>
+      個人創作的世界觀下，有關人類與幽靈的故事。
+  </main>
+  <footer class="float-right">
+    <a href="index.html">back</a><br>
+    <small>template by <a href="https://miroirs.stars.ne.jp/" target="_blank" rel="noopener noreferrer">Miroirs</a></small>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $('a[href^="#"]').click(function () {
+        var speed = 1000;
+        var href= $(this).attr("href");
+        var target = $(href == "#" || href == "" ? 'html' : href);
+        var position = target.offset().top;
+        $('body,html').animate({scrollTop:position}, speed, 'swing');
+        return false;
+      });
+    });
+  </script>
+</body>
+</html>
